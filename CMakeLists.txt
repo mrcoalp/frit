@@ -4,11 +4,15 @@ project(frit-language)
 
 option(FRIT_BUILD_TESTS "Build Frit tests" OFF)
 
+set(CMAKE_MACOSX_RPATH 1)
+
+set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
-add_subdirectory(frit)
+add_subdirectory(lib)
 
 add_executable(frit-bin src/main.cpp)
 

@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.14.5)
+
 include(FetchContent)
 
 FetchContent_Declare(googletest
@@ -10,10 +12,10 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(frit_test dummy.cpp)
+add_executable(frit-test dummy.cpp)
 
-target_link_libraries(frit_test frit gtest_main)
+target_link_libraries(frit-test frit gtest_main)
 
 include(GoogleTest)
 
-gtest_discover_tests(frit_test)
+gtest_discover_tests(frit-test)

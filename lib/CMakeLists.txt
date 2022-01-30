@@ -19,12 +19,12 @@ target_include_directories(frit PUBLIC
 
 include(CMakePackageConfigHelpers)
 
-write_basic_package_version_file("${CMAKE_CURRENT_BINARY_DIR}/FritConfigVersion.cmake"
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/FritConfigVersion.cmake
         VERSION 0.0.1
         COMPATIBILITY AnyNewerVersion)
 
 install(TARGETS frit
-        EXPORT frit_targets
+        EXPORT FritTargets
         LIBRARY DESTINATION lib COMPONENT Runtime
         ARCHIVE DESTINATION lib COMPONENT Development
         RUNTIME DESTINATION bin COMPONENT Runtime
@@ -33,13 +33,13 @@ install(TARGETS frit
 
 include(CMakePackageConfigHelpers)
 
-configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/cmake/FritConfig.cmake.in"
-        "${CMAKE_CURRENT_BINARY_DIR}/FritConfig.cmake"
-        INSTALL_DESTINATION lib/cmake/frit)
+configure_package_config_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/FritConfig.cmake.in
+        ${CMAKE_CURRENT_BINARY_DIR}/FritConfig.cmake
+        INSTALL_DESTINATION lib/cmake/Frit)
 
-install(EXPORT frit_targets DESTINATION lib/cmake/frit)
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/FritConfigVersion.cmake"
-        "${CMAKE_CURRENT_BINARY_DIR}/FritConfig.cmake"
-        DESTINATION lib/cmake/frit)
+install(EXPORT FritTargets DESTINATION lib/cmake/Frit)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/FritConfigVersion.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/FritConfig.cmake
+        DESTINATION lib/cmake/Frit)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/exports/frit_export.h DESTINATION include/frit)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/public/ DESTINATION include/frit)
