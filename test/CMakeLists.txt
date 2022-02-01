@@ -12,7 +12,7 @@ FetchContent_MakeAvailable(googletest)
 
 enable_testing()
 
-add_executable(frit-test dummy.cpp)
+add_executable(frit-test lexer.test.cpp)
 
 target_link_libraries(frit-test frit gtest_main)
 
