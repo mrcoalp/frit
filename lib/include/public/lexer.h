@@ -1,11 +1,18 @@
 #include <string>
+#include <vector>
 
 #include "frit_export.h"
 
 namespace frit {
-class FRIT_EXPORT lexer {
-public:
-	std::string hello() const;
-	int test() const;
+enum class token_type { INT, IDENT, ADD, SUB, MUL, DIV };
+
+struct FRIT_EXPORT token {
+	token_type type;
+	std::string value;
 };
+
+namespace lexer {
+std::vector<token> FRIT_EXPORT tokenize(const std::string& source);
+std::vector<token> FRIT_EXPORT tokenize_file(const std::string& filepath);
+}  // namespace lexer
 }  // namespace frit
