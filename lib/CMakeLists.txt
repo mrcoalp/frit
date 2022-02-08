@@ -25,6 +25,11 @@ target_include_directories(frit PUBLIC
 
 target_link_libraries(frit PUBLIC CONAN_PKG::fmt)
 
+if (WIN32)
+    add_custom_command(TARGET frit POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/frit.dll" "${CMAKE_BINARY_DIR}")
+endif ()
+
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/FritConfigVersion.cmake

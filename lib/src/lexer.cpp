@@ -22,7 +22,7 @@ std::vector<token> lexer::tokenize(const std::string& source) {
 			++current_position.second;
 			// a number can only contain a single dot
 			if (next == '.' && number.find('.') != std::string::npos) {
-				throw lexer_exception("invalid char", current_position);
+				throw lexer_exception("invalid syntax", current_position);
 			}
 			// append to number string
 			current_char = next;
@@ -57,9 +57,11 @@ std::vector<token> lexer::tokenize(const std::string& source) {
 			tokens.push_back({token_type::rparen});
 		} else if (std::isdigit(current_char)) {
 			tokens.push_back({token_type::number, parse_number(i)});
+		} else {
+			throw lexer_exception("invalid syntax", current_position);
 		}
 
-		++current_position.first;
+		++current_position.second;
 	}
 
 	return tokens;
