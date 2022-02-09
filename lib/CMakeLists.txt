@@ -4,12 +4,6 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 set(CMAKE_VISIBILITY_INLINES_HIDDEN 1)
 
-execute_process(COMMAND conan install "${CMAKE_SOURCE_DIR}" WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}")
-
-include("${CMAKE_CURRENT_BINARY_DIR}/conanbuildinfo.cmake")
-
-conan_basic_setup(TARGETS)
-
 add_library(frit SHARED src/lexer.cpp)
 
 include(GenerateExportHeader)
@@ -23,11 +17,9 @@ target_include_directories(frit PUBLIC
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_link_libraries(frit PUBLIC CONAN_PKG::fmt)
-
 if (WIN32)
     add_custom_command(TARGET frit POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/frit.dll" "${CMAKE_BINARY_DIR}")
+            "${CMAKE_CURRENT_BINARY_DIR}/frit.dll" "${CMAKE_BINARY_DIR}")
 endif ()
 
 include(CMakePackageConfigHelpers)

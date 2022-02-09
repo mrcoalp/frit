@@ -2,7 +2,13 @@
 
 #include <fstream>
 
+#include "string_utils.h"
+
 namespace frit {
+
+lexer_exception::lexer_exception(const std::string& message, const std::pair<int, int>& position) {
+	m_message = string_utils::format("%s at [%i:%i]", message.c_str(), position.first, position.second);
+}
 
 std::vector<token> lexer::tokenize(const std::string& source) {
 	std::vector<token> tokens;
