@@ -27,6 +27,6 @@ TEST(lexer, float_exception) {
 		lexer::tokenize("2.6.2");
 		FAIL();
 	} catch (const lexer_exception& err) {
-		EXPECT_STREQ("invalid syntax @1:4", err.what());
+		EXPECT_STREQ("invalid syntax at [1:4]", err.what());
 	}
 }

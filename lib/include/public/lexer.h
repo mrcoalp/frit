@@ -17,8 +17,10 @@ struct token {
 
 class lexer_exception : public std::exception {
 public:
-	explicit lexer_exception(const std::string& message, const std::pair<int, int>& position)
-		: m_message(std::move(fmt::format("{} @{}:{}", message, position.first, position.second))) {}
+	explicit lexer_exception(std::string message) : m_message(std::move(message)) {}
+
+	lexer_exception(const std::string& message, const std::pair<int, int>& position)
+		: m_message(std::move(fmt::format("{} at [{}:{}]", message, position.first, position.second))) {}
 
 	inline const char* what() const noexcept override { return m_message.c_str(); }
 

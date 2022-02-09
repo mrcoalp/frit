@@ -20,6 +20,4 @@ include(GoogleTest)
 
 gtest_discover_tests(frit-test)
 
-if (WIN32)
-    set_target_properties(frit-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
-endif ()
+set_target_properties(frit-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")

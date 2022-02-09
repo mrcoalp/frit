@@ -1,4 +1,5 @@
 #include <iostream>
+#include <lyra/lyra.hpp>
 
 #include "lexer.h"
 
@@ -44,8 +45,31 @@ int shell() {
 }
 
 int main(int argc, char** argv) {
-	if (argc == 1) {
+	bool show_help = false;
+	std::string file;
+	std::string code;
+
+	auto cli = lyra::cli() | lyra::help(show_help).description("launch frit interactive shell or run a file script") |
+			   lyra::opt(code, "code")["-c"]["--code"]("program read from code") | lyra::arg(file, "file")("program read from script file");
+
+	auto result = cli.parse({argc, argv});
+
+	if (!result) {
+		std::cerr << result.message() << std::endl;
+		return 1;
+	}
+	if (show_help) {
+		std::cout << cli << std::endl;
+		return 0;
+	}
+	if (!code.empty()) {
+		std::cerr << "running code still not implemented" << std::endl;
+		return 1;
+	}
+	if (file.empty()) {
 		return shell();
 	}
-	return 0;
+
+	std::cerr << "running file still not implemented" << std::endl;
+	return 1;
 }

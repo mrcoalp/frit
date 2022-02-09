@@ -37,10 +37,11 @@ std::vector<token> lexer::tokenize(const std::string& source) {
 		current_char = source.at(i);
 
 		if (current_char == ' ' || current_char == '\t') {
-			tokens.push_back({token_type::ident});
+			void();
 		} else if (current_char == '\n') {
-			tokens.push_back({token_type::ident});
-			current_position = {1, 1};
+			// increment row and reset column
+			++current_position.first;
+			current_position.second = 0;
 		} else if (current_char == '+') {
 			tokens.push_back({token_type::add});
 		} else if (current_char == '-') {
@@ -70,7 +71,7 @@ std::vector<token> lexer::tokenize(const std::string& source) {
 std::vector<token> lexer::tokenize_file(const std::string& filepath) {
 	std::ifstream source{filepath};
 	if (!source.is_open()) {
-		throw std::exception("could not open file");
+		throw lexer_exception("could not open file");
 	}
 	return tokenize(std::string{std::istreambuf_iterator<char>{source}, {}});
 }

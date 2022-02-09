@@ -8,11 +8,13 @@ set(CMAKE_MACOSX_RPATH 1)
 
 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib")
 
+add_subdirectory(vendor/lyra)
+
 add_subdirectory(lib)
 
 add_executable(frit-bin src/main.cpp)
 
-target_link_libraries(frit-bin frit)
+target_link_libraries(frit-bin frit lyra)
 
 set_target_properties(frit-bin PROPERTIES OUTPUT_NAME frit)
 
