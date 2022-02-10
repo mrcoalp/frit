@@ -2,6 +2,7 @@
 #include <lyra/lyra.hpp>
 
 #include "lexer.h"
+#include "parser.h"
 
 std::string get_token_type_name(frit::token_type type) {
 	switch (type) {

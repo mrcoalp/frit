@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "string_utils.h"
+#include "token.h"
 
 namespace frit {
 

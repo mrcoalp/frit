@@ -14,7 +14,7 @@ add_subdirectory(lib)
 
 add_executable(frit-bin src/main.cpp)
 
-target_link_libraries(frit-bin frit lyra)
+target_link_libraries(frit-bin frit bfg::lyra)
 
 set_target_properties(frit-bin PROPERTIES OUTPUT_NAME frit)
 
