@@ -19,10 +19,7 @@ target_include_directories(frit PUBLIC
         PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-if (WIN32)
-    add_custom_command(TARGET frit POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${CMAKE_CURRENT_BINARY_DIR}/frit.dll" "${CMAKE_BINARY_DIR}")
-endif ()
+set_target_properties(frit PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
 include(CMakePackageConfigHelpers)
 

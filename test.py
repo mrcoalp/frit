@@ -16,5 +16,4 @@ def _parse_cli():
 if __name__ == "__main__":
     parsed_args = _parse_cli()
     test_path = os.path.join(os.getcwd(), "build", parsed_args.build, "test")
-    os.chdir(test_path)
-    sys.exit(sp.call(["ctest", "--extra-verbose"]))
+    sys.exit(sp.call(["ctest", "--extra-verbose", "--test-dir", test_path]))
