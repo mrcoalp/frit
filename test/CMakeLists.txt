@@ -1,23 +1,11 @@
-cmake_minimum_required(VERSION 3.14.5)
-
-include(FetchContent)
-
-FetchContent_Declare(googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG release-1.11.0)
-
-set(gtest_force_shared_crt ON CACHE BOOL "Always use msvcrt.dll" FORCE)
-
-FetchContent_MakeAvailable(googletest)
+cmake_minimum_required(VERSION 3.8)
 
 enable_testing()
 
-add_executable(frit-test lexer.test.cpp)
+add_executable(lexer-test lexer.test.cpp)
 
-target_link_libraries(frit-test frit gtest_main)
+target_link_libraries(lexer-test frit)
 
-include(GoogleTest)
+set_target_properties(lexer-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
 
-gtest_discover_tests(frit-test)
-
-set_target_properties(frit-test PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+add_test(NAME lexer-test COMMAND $<TARGET_FILE:lexer-test>)

@@ -1,7 +1,7 @@
 #!/bin/env python3
 
 import os
-import subprocess
+import subprocess as sp
 from argparse import ArgumentParser
 
 import sys
@@ -15,14 +15,12 @@ def _parse_cli():
 
 
 def _cmake(*args):
-    return subprocess.call(["cmake"] + list(args)) == 0
+    return sp.call(["cmake"] + list(args)) == 0
 
 
 if __name__ == "__main__":
     parsed_args = _parse_cli()
     build_path = os.path.join(os.getcwd(), "build", parsed_args.build)
-
-    os.makedirs(build_path, exist_ok=True)
 
     cmake_options = [
         "-DCMAKE_BUILD_TYPE={}".format(parsed_args.build),
@@ -33,4 +31,6 @@ if __name__ == "__main__":
         sys.exit(1)
     if not _cmake("--build", build_path):
         sys.exit(1)
+    if parsed_args.tests:
+        sp.call([sys.executable, "test.py", "-b", parsed_args.build])
     sys.exit(0)
